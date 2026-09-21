@@ -6,7 +6,7 @@ The adapter stores database files in a Git repository.
 ## Install
 
 ```sh
-bun add @wxn0brp/db-storage-git @wxn0brp/db-core @wxn0brp/db-storage-dir
+bun add @wxn0brp/db-storage-git
 ```
 
 The package requires Git to be installed and available as `git` on the system path.
@@ -18,10 +18,10 @@ import { createGitAdapter } from "@wxn0brp/db-storage-git";
 import { ValtheraClass } from "@wxn0brp/db-core";
 
 const adapter = createGitAdapter({
+  dir: "./data",
   git: {
     url: "https://github.com/example/my-database.git",
-    branch: "main",
-    workdir: "./data",
+    branch: "master",
     auth: {
       type: "token",
       username: "git",
