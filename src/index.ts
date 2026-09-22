@@ -3,7 +3,7 @@ import { DebounceFlusher } from "./flusher";
 import { GitManager } from "./git";
 import type { GitAdapterOpts } from "./types";
 
-export async function createGitAdapter(opts: GitAdapterOpts) {
+export async function createGit(opts: GitAdapterOpts) {
 	const { dir, git, flusher } = opts;
 
 	const adapter = new GitSnapshotActions(dir, opts.dirOpts ?? {});
@@ -35,6 +35,15 @@ export async function createGitAdapter(opts: GitAdapterOpts) {
 		}, flusherOpts.delay);
 	}
 
+	return {
+		adapter,
+		gitManager,
+		debounceFlusher,
+	};
+}
+
+export async function createGitAdapter(opts: GitAdapterOpts) {
+	const { adapter } = await createGit(opts);
 	return adapter;
 }
 

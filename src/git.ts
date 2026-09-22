@@ -146,21 +146,17 @@ export class GitManager {
 		}
 	}
 
-	async hasChanged() {
-		const lines = execFileSync(
+	hasChanged() {
+		const stdout = execFileSync(
 			"git",
 			[
 				"status",
-				"-s",
+				"--porcelain",
 			],
 			{
 				cwd: this._dir,
 			},
-		)
-			.toString()
-			.split("\n")
-			.map(line => line.trim())
-			.filter(Boolean);
-		return lines.length > 0;
+		);
+		return stdout.length > 0;
 	}
 }

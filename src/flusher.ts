@@ -22,7 +22,7 @@ export class DebounceFlusher {
 	}
 
 	async _flushFn() {
-		const changed = await this.git.hasChanged();
+		const changed = this.git.hasChanged();
 		if (!changed) return;
 
 		await this.git.add();
