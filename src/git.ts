@@ -112,13 +112,11 @@ export class GitManager {
 		if (!this._configured) {
 			this._run([
 				"config",
-				"--global",
 				"user.name",
 				"ValtheraDB Git Adapter",
 			]);
 			this._run([
 				"config",
-				"--global",
 				"user.email",
 				"valthera@noreply.local",
 			]);
