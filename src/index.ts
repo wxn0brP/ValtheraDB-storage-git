@@ -20,8 +20,14 @@ export async function createGit(opts: GitAdapterOpts) {
 
 	const debounceFlusher = new DebounceFlusher(flusherOpts, gitManager);
 
-	const originalClose = adapter.close.bind(adapter);
+	const originalRemoveCollection = adapter.removeCollection.bind(adapter);
+	adapter.removeCollection = async (collection: string) => {
+		const result = await originalRemoveCollection(collection);
+		debounceFlusher.trigger();
+		return result;
+	};
 
+	const originalClose = adapter.close.bind(adapter);
 	adapter.close = async () => {
 		if (interval) clearInterval(interval);
 		await debounceFlusher.flush();
