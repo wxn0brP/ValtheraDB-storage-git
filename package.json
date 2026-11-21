@@ -29,7 +29,7 @@
     },
     "dependencies": {
         "@wxn0brp/db-core": "^0.12.10",
-        "@wxn0brp/db-storage-dir": "^0.120.6"
+        "@wxn0brp/db-storage-dir": "^0.121.0"
     },
     "files": [
         "dist"
